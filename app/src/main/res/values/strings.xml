@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TL01E0027</string>
+    <string-array name="paises_array">
+        <item>+501 - Belice</item>
+        <item>+502 - Guatemala</item>
+        <item>+503 - El Salvador</item>
+        <item>+504 - Honduras</item>
+        <item>+505 - Nicaragua</item>
+        <item>+506 - Costa Rica</item>
+        <item>+507 - Panamá</item>
+    </string-array>
+</resources>
