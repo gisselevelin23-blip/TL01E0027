@@ -60,7 +60,13 @@ public class ActivityLista extends AppCompatActivity {
                     break;
                 }
             }
-            mostrarDetallesContacto();
+
+            if (contactoSeleccionado != null) {
+                Intent intent = new Intent(this, ActivityLlamar.class);
+                intent.putExtra("nombre", contactoSeleccionado.getNombre());
+                intent.putExtra("telefono", contactoSeleccionado.getTelefono());
+                startActivity(intent);
+            }
         });
 
         findViewById(R.id.btnCompartir).setOnClickListener(v -> compartir());
@@ -83,56 +89,6 @@ public class ActivityLista extends AppCompatActivity {
         });
 
         findViewById(R.id.btnAtras).setOnClickListener(v -> finish());
-    }
-
-    private void mostrarDetallesContacto() {
-        if (contactoSeleccionado == null) return;
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(contactoSeleccionado.getNombre());
-
-        String info = "Teléfono: " + contactoSeleccionado.getTelefono() +
-                "\nPaís: " + contactoSeleccionado.getPais() +
-                "\nNota: " + contactoSeleccionado.getNota();
-        builder.setMessage(info);
-
-        if (contactoSeleccionado.getImagen() != null) {
-            byte[] img = contactoSeleccionado.getImagen();
-            Bitmap bmp = BitmapFactory.decodeByteArray(img, 0, img.length);
-            ImageView iv = new ImageView(this);
-            iv.setPadding(0, 30, 0, 0);
-            iv.setImageBitmap(bmp);
-            builder.setView(iv);
-        }
-
-        builder.setPositiveButton("Llamar", (d, w) -> mostrarDialogoLlamada());
-        builder.setNegativeButton("Cerrar", null);
-        builder.show();
-    }
-
-    // MÉTODO ACTUALIZADO: Cumple con Intent ACTION_CALL y AlertDialog
-    private void mostrarDialogoLlamada() {
-        if (contactoSeleccionado == null) return;
-
-        new AlertDialog.Builder(this)
-                .setTitle("Confirmar Llamada")
-                .setMessage("¿Desea llamar a " + contactoSeleccionado.getNombre() + "?")
-                .setPositiveButton("Si", (d, w) -> {
-                    try {
-                        // Requisito: ACTION_CALL
-                        Intent intentCall = new Intent(Intent.ACTION_CALL);
-                        intentCall.setData(Uri.parse("tel:" + contactoSeleccionado.getTelefono()));
-                        startActivity(intentCall);
-                    } catch (SecurityException e) {
-                        // Si falla el permiso, usamos ACTION_DIAL como respaldo
-                        Toast.makeText(this, "Falta permiso de llamadas", Toast.LENGTH_SHORT).show();
-                        Intent intentDial = new Intent(Intent.ACTION_DIAL);
-                        intentDial.setData(Uri.parse("tel:" + contactoSeleccionado.getTelefono()));
-                        startActivity(intentDial);
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
     }
 
     private void verFoto() {
