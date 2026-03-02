@@ -8,10 +8,8 @@ public class Contactos {
     private String nota;
     private byte[] imagen;
 
-    // Constructor vacío
     public Contactos() {}
 
-    // Constructor lleno para facilitar la creación del objeto
     public Contactos(Integer id, String pais, String nombre, String telefono, String nota, byte[] imagen) {
         this.id = id;
         this.pais = pais;
@@ -20,8 +18,6 @@ public class Contactos {
         this.nota = nota;
         this.imagen = imagen;
     }
-
-    // Métodos Getter y Setter (Necesarios para la rúbrica)
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 

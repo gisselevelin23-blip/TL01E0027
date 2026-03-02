@@ -26,16 +26,14 @@ public class MainActivity extends AppCompatActivity {
     EditText txtNombre, txtTelefono, txtNota;
     Button btnSalvar, btnContactos;
     ImageView imageView;
-    ImageButton btnAgregarPais; // Nuevo botón
+    ImageButton btnAgregarPais;
 
     byte[] imagenEnBytes;
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
-    // Variables para países dinámicos
     ArrayList<String> listaPaises;
     ArrayAdapter<String> adaptadorPaises;
 
-    // Variables para actualización
     int idRecibido = -1;
     boolean esEdicion = false;
 
@@ -44,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Inicialización de controles
         comboPais = findViewById(R.id.comboPais);
         txtNombre = findViewById(R.id.nombres);
         txtTelefono = findViewById(R.id.telefono);
@@ -52,9 +49,8 @@ public class MainActivity extends AppCompatActivity {
         btnSalvar = findViewById(R.id.btnsalvarcontacto);
         btnContactos = findViewById(R.id.btncontactossalvados);
         imageView = findViewById(R.id.imageViewContacto);
-        btnAgregarPais = findViewById(R.id.btnAgregarPais); //
+        btnAgregarPais = findViewById(R.id.btnAgregarPais);
 
-        // --- CONFIGURACIÓN DE LISTA DE PAÍSES ---
         listaPaises = new ArrayList<>();
         listaPaises.add("+504 - Honduras");
         listaPaises.add("+502 - Guatemala");
@@ -68,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         adaptadorPaises.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         comboPais.setAdapter(adaptadorPaises);
 
-        // --- RECIBIR DATOS PARA ACTUALIZAR ---
         if (getIntent().hasExtra("id")) {
             esEdicion = true;
             idRecibido = getIntent().getIntExtra("id", -1);
@@ -84,9 +79,6 @@ public class MainActivity extends AppCompatActivity {
             btnSalvar.setText("Actualizar Contacto");
         }
 
-        // --- EVENTOS ---
-
-        // Botón para agregar país nuevo
         btnAgregarPais.setOnClickListener(v -> mostrarDialogoNuevoPais());
 
         imageView.setOnClickListener(v -> abrirCamara());
