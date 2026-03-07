@@ -10,7 +10,7 @@ public class SQLiteConexion extends SQLiteOpenHelper {
     public static final String NameDatabase = "DB_Contactos";
     public static final int version = 1;
 
-    private static final String CREATE_TABLE_CONTACTOS = "CREATE TABLE contactos (" +
+    public static final String CREATE_TABLE_CONTACTOS = "CREATE TABLE contactos (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "pais TEXT, " +
             "nombre TEXT, " +
